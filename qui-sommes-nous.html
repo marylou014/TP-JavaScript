@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qui sommes-nous ? - Burger Factory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Logo -->
+  <a class="logo" href="index.html">Burger Factory <span aria-hidden="true">✦</span></a>
+  <!-- Menu de navigation commun -->
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="creation-burger.html">Création Burger</a>
+    <a href="creation-ingredient.html">Création Ingrédient</a>
+    <a href="qui-sommes-nous.html" aria-current="page">Qui sommes-nous ?</a>
+  </nav>
+
+  <main class="contenu">
+    <!-- Bloc texte de présentation -->
+    <section class="cadre texte" id="bloc-texte">
+      <p>
+        Chaque jour, plus de 11 millions de clients visitent Burger Factory ® restaurants à travers
+        le monde. Et ils le font parce que nos restaurants sont connus pour servir de haute qualité,
+        une grande dégustation, et la nourriture abordable. Fondée en 1954, Burger Factory ® est la
+        deuxième plus grande chaîne de hamburgers de la restauration rapide dans le monde. La maison
+        originale de Whopper ® , notre engagement envers ingrédients de première qualité, des
+        recettes de signature et expériences culinaires de la famille est ce qui a défini notre
+        marque depuis plus de 50 ans de succès.
+      </p>
+
+      <!-- Phrase générée avec l'API (ferme bio + productions), injectée en JS -->
+      <div id="resultat-api" class="resultat-api" aria-live="polite"></div>
+    </section>
+
+    <!-- Bandeau Burger Factory -->
+    <div class="cadre">
+      <img class="banniere" src="img/burger-factory.png" alt="Burger Factory : quatre burgers de tailles croissantes">
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

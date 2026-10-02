@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Création Burger - Burger Factory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Logo -->
+  <a class="logo" href="index.html">Burger Factory <span aria-hidden="true">✦</span></a>
+  <!-- Menu de navigation commun -->
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="creation-burger.html" aria-current="page">Création Burger</a>
+    <a href="creation-ingredient.html">Création Ingrédient</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous ?</a>
+  </nav>
+
+  <main class="contenu">
+    <!-- Bandeau d'images du haut -->
+    <div class="cadre">
+      <img class="bandeau" src="img/bandeau-burgers.png" alt="Sélection de burgers">
+    </div>
+
+    <!-- Bloc blanc "Créer votre Burger" -->
+    <fieldset class="formulaire" id="bloc-burger">
+      <legend>Créer votre Burger</legend>
+
+      <div class="champ">
+        <label for="nom-burger">Nom du Burger :</label>
+        <input type="text" id="nom-burger" placeholder="Texas Burger">
+      </div>
+
+      <!-- Les 3 listes : les ingrédients de base ci-dessous + ceux créés en JS -->
+      <div class="champ">
+        <label for="ingredient-1">Ingrédient 1</label>
+        <select id="ingredient-1">
+          <option value="" selected></option>
+          <option value="Pain">Pain</option>
+          <option value="Steak">Steak</option>
+          <option value="Salade">Salade</option>
+          <option value="Fromage">Fromage</option>
+        </select>
+      </div>
+
+      <div class="champ">
+        <label for="ingredient-2">Ingrédient 2</label>
+        <select id="ingredient-2">
+          <option value="" selected></option>
+          <option value="Pain">Pain</option>
+          <option value="Steak">Steak</option>
+          <option value="Salade">Salade</option>
+          <option value="Fromage">Fromage</option>
+        </select>
+      </div>
+
+      <div class="champ">
+        <label for="ingredient-3">Ingrédient 3</label>
+        <select id="ingredient-3">
+          <option value="" selected></option>
+          <option value="Pain">Pain</option>
+          <option value="Steak">Steak</option>
+          <option value="Salade">Salade</option>
+          <option value="Fromage">Fromage</option>
+        </select>
+      </div>
+
+      <button type="button" id="btn-creer-burger">Créer le Burger</button>
+    </fieldset>
+
+    <!-- Message d'erreur : juste en dessous du bloc "Créer votre Burger" -->
+    <p id="erreur-burger" class="message-erreur" role="alert"></p>
+
+    <!-- Bandeau d'images du bas -->
+    <div class="cadre">
+      <img class="bandeau" src="img/bandeau-burgers.png" alt="Sélection de burgers">
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

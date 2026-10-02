@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accueil - Burger Factory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Logo -->
+  <a class="logo" href="index.html">Burger Factory <span aria-hidden="true">✦</span></a>
+  <!-- Menu de navigation commun -->
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="index.html" aria-current="page">Accueil</a>
+    <a href="creation-burger.html">Création Burger</a>
+    <a href="creation-ingredient.html">Création Ingrédient</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous ?</a>
+  </nav>
 
+  <main class="contenu">
+    <!-- Diaporama : l'image (src) change toutes les 10 s via le JS -->
+    <section class="diaporama" aria-label="Diaporama des burgers">
+      <img id="image-burger" src="img/burger-diapo/burger-1.jpg" alt="Burger du diaporama">
+      <!-- Le nom du burger s'affiche ici au clic sur l'image -->
+      <p id="legende-burger" class="nom-burger" aria-live="polite">Burger 1</p>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,359 @@
+/* ==========================================================
+   BurgerFactory - style "Pop & Sand"
+   Feuille de style commune à toutes les pages
+   ========================================================== */
+
+/* ---------- Variables : toute la palette est ici ---------- */
+:root {
+  --sable: #FDFBF7;          /* fond de page */
+  --encre: #2B2D42;          /* textes + contours */
+  --marine: #0052a3;
+  --bleu-pop: #6b9efd;
+  --bleu-doux: #E0EAFC;
+  --rose: #f5a0c8;
+  --jaune: #f5c842;
+  --sauge: #7fb99a;
+  --blanc: #ffffff;
+  --erreur-texte: #a3153a;
+  --erreur-fond: #ffe1ec;
+
+  --police: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --rayon: 22px;
+  --contour: 3px solid var(--encre);
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px 64px;
+  color: var(--encre);
+  font-family: var(--police);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Grille de points typique Pop & Sand */
+  background-color: var(--sable);
+  background-image: radial-gradient(rgba(43, 45, 66, 0.16) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: block;
+  margin: 0 auto 16px;
+  width: fit-content;
+  color: var(--encre);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--rose);
+  -webkit-text-stroke: 1px var(--encre);
+}
+
+/* ---------- Menu de navigation (boutons "pilule") ---------- */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.menu a {
+  padding: 6px 18px;
+  color: var(--encre);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--blanc);
+  border: 2px solid var(--encre);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--rose);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.menu a:hover {
+  background: var(--jaune);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--rose);
+}
+
+.menu a[aria-current="page"] {
+  color: var(--blanc);
+  background: var(--marine);
+}
+
+.menu a:focus-visible,
+fieldset.formulaire :focus-visible {
+  outline: 3px solid var(--bleu-pop);
+  outline-offset: 3px;
+}
+
+/* ---------- Grand bloc central ---------- */
+.contenu {
+  position: relative;
+  width: min(100%, 820px);
+  margin: 0 auto;
+  padding: 48px 40px;
+  background: var(--blanc);
+  border: var(--contour);
+  border-radius: 30px;
+  box-shadow: 8px 8px 0 var(--bleu-pop);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Petites étoiles décoratives dans les coins (ignorées par les lecteurs d'écran) */
+.contenu::before,
+.contenu::after {
+  position: absolute;
+  font-size: 2rem;
+  line-height: 1;
+  -webkit-text-stroke: 1.5px var(--encre);
+  pointer-events: none;
+}
+
+.contenu::before {
+  content: "✦";
+  content: "✦" / "";
+  top: -20px;
+  right: 28px;
+  color: var(--jaune);
+}
+
+.contenu::after {
+  content: "✦";
+  content: "✦" / "";
+  bottom: -22px;
+  left: 32px;
+  color: var(--rose);
+}
+
+/* ---------- Bloc encadré générique (images, bandeaux, texte) ---------- */
+.cadre {
+  width: 100%;
+  padding: 10px;
+  background: var(--bleu-doux);
+  border: var(--contour);
+  border-radius: var(--rayon);
+}
+
+.cadre img {
+  margin: 0 auto;
+  border-radius: 14px;
+}
+
+.cadre-image {
+  width: min(100%, 420px);
+}
+
+/* ---------- Page Accueil : diaporama ---------- */
+.diaporama {
+  width: min(100%, 420px);
+  padding: 12px;
+  text-align: center;
+  background: var(--jaune);
+  border: var(--contour);
+  border-radius: 26px;
+  box-shadow: 6px 6px 0 var(--rose);
+}
+
+.diaporama img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: var(--contour);
+  border-radius: 16px;
+  cursor: pointer; /* on clique sur l'image pour afficher le nom */
+}
+
+/* Nom du burger sous l'image : n'apparaît que quand le JS le remplit */
+.nom-burger {
+  display: inline-block;
+  margin: 14px 0 4px;
+  padding: 4px 18px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--blanc);
+  border: 2px solid var(--encre);
+  border-radius: 999px;
+}
+
+.nom-burger:empty {
+  display: none;
+}
+
+/* ---------- Page "Qui sommes-nous ?" ---------- */
+.texte {
+  padding: 28px 30px;
+  background: var(--sable);
+}
+
+.texte p {
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
+/* Zone où le JS écrit la phrase construite avec l'API */
+.resultat-api {
+  max-width: 62ch;
+  margin: 20px auto 0;
+  padding-top: 18px;
+  border-top: 2px dashed var(--bleu-pop);
+}
+
+.resultat-api:empty {
+  display: none;
+}
+
+.resultat-api ul {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+
+.resultat-api li::marker {
+  color: var(--rose);
+}
+
+.banniere {
+  border: 4px solid var(--jaune);
+}
+
+/* ---------- Formulaires (Création Burger / Création Ingrédient) ---------- */
+fieldset.formulaire {
+  width: min(100%, 470px);
+  margin: 0;
+  padding: 22px 26px 26px;
+  background: var(--sable);
+  border: var(--contour);
+  border-radius: var(--rayon);
+  box-shadow: 5px 5px 0 var(--sauge);
+}
+
+fieldset.formulaire legend {
+  padding: 2px 16px;
+  font-weight: 800;
+  background: var(--rose);
+  border: 2px solid var(--encre);
+  border-radius: 999px;
+}
+
+.champ {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.champ label {
+  flex: 0 0 125px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.champ input,
+.champ select {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--encre);
+  background: var(--blanc);
+  border: 2px solid var(--encre);
+  border-radius: 12px;
+}
+
+.champ input::placeholder {
+  color: #8a8da3;
+}
+
+/* Bouton principal */
+fieldset.formulaire button {
+  padding: 8px 22px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--encre);
+  background: var(--jaune);
+  border: 2px solid var(--encre);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--encre);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+fieldset.formulaire button:hover {
+  background: #ffd75e;
+}
+
+fieldset.formulaire button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--encre);
+}
+
+/* ---------- Messages d'erreur (remplis en JS) ---------- */
+.message-erreur {
+  margin: 0;
+  padding: 8px 18px;
+  max-width: 100%;
+  color: var(--erreur-texte);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  background: var(--erreur-fond);
+  border: 2px solid var(--erreur-texte);
+  border-radius: 14px;
+}
+
+/* Vide = invisible (pas de bloc rose fantôme) */
+.message-erreur:empty {
+  display: none;
+}
+
+/* ---------- Bandeaux d'images (Création Burger) ---------- */
+.bandeau {
+  width: 100%;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .contenu {
+    padding: 36px 16px;
+  }
+
+  .champ {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .champ label {
+    flex: none;
+  }
+}
+
+/* Respect des préférences d'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

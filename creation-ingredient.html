@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Création Ingrédient - Burger Factory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Logo -->
+  <a class="logo" href="index.html">Burger Factory <span aria-hidden="true">✦</span></a>
+  <!-- Menu de navigation commun -->
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="creation-burger.html">Création Burger</a>
+    <a href="creation-ingredient.html" aria-current="page">Création Ingrédient</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous ?</a>
+  </nav>
+
+  <main class="contenu">
+    <!-- Bloc "Créer votre Ingrédient" -->
+    <fieldset class="formulaire" id="bloc-ingredient">
+      <legend>Créer votre Ingrédient</legend>
+
+      <div class="champ">
+        <label for="nom-ingredient">Nom</label>
+        <input type="text" id="nom-ingredient" placeholder="Tomate">
+      </div>
+
+      <div class="champ">
+        <label for="quantite-ingredient">Quantité</label>
+        <input type="number" id="quantite-ingredient" placeholder="12">
+      </div>
+
+      <button type="button" id="btn-creer-ingredient">Créer l'ingrédient</button>
+    </fieldset>
+
+    <!-- Message d'erreur : entre le bloc formulaire et le bloc image -->
+    <p id="erreur-ingredient" class="message-erreur" role="alert"></p>
+
+    <!-- Bloc "Image des ingrédients" -->
+    <div class="cadre cadre-image">
+      <img src="img/ingredients.png" alt="Ingrédients pour burgers : pains, viande, salade, citron, fromage">
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
