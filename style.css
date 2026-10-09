@@ -39,7 +39,6 @@ body {
   line-height: 1.6;
   /* Grille de points typique Pop & Sand */
   background-color: var(--sable);
-  background-image: radial-gradient(rgba(43, 45, 66, 0.16) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
 }
 
