@@ -43,7 +43,7 @@ if (img){ // ne marche que si sur la page il y a ma variable img
 if (localStorage.getItem("Steak") === null){
     localStorage.setItem("Steak", 10);
 }
-else if (localStorage.getItem("Pain Burger") === null){
+if (localStorage.getItem("Pain Burger") === null){
     localStorage.setItem("Pain Burger", 10);
 }
 
@@ -99,15 +99,28 @@ let menuDeroulant = [ // récup des menus déroulants
     document.getElementById("ingredient-3"),
 ]
 
-// boucle qui remplie les menus déroulant avec les éléments du locaStorage
+// fonction qui remplie les menus déroulant avec les éléments du locaStorage avec un boucle
+function remplirMenuDeroulant(){
 
-for (let i = 0; i < localStorage.length; i++){
-    let nom = localStorage.key(i);
-    // vérif que l'ingrédient est en stock (+ de 0 en quantité)
+    // vider les listes (pour quand ca refresh)
+    for (let liste of menuDeroulant){
+        liste.innerHTML = "";
+        let optionVide = document.createElement("option");
+        optionVide.value = "";
+        liste.appendChild(optionVide);
+    }
+
+    for (let i = 0; i < localStorage.length; i++){
+
+        let nom = localStorage.key(i);
+
+        // vérif que l'ingrédient est en stock (+ de 0 en quantité)
         let verifStock = Number(localStorage.getItem(nom))
+
         if (verifStock > 0){
             // boucle dans la boucle pour remplir les trois listes
             for (let liste of menuDeroulant){
+
                 let option = document.createElement("option"); // créer un élément de type option
                 option.value = nom; // set la value
                 option.textContent = nom; // set le nom
@@ -115,6 +128,7 @@ for (let i = 0; i < localStorage.length; i++){
             }
         }
     }
+}
 
 // function qui créer les burgers
 function creerBurger(){
@@ -147,17 +161,23 @@ function creerBurger(){
         // en déduire les ingrédients
             let optionChoisi = [champ1, champ2, champ3];
 
-            for (choix of optionChoisi){
+            for (let choix of optionChoisi){
                 let ancienneQuantite = Number(localStorage.getItem(choix)); // recup la quantité
                 //console.log("Avant : ", ancienneQuantite, choix );
 
                 localStorage.setItem(choix, ancienneQuantite -1); // retire 1 à la quantité
                 //console.log("Apres : ", choix, localStorage.getItem(choix)) ;
             }
+        //maj liste + retire les champs
+            remplirMenuDeroulant();
+            document.getElementById("nom-burger").value = ""; // vide le champs nom
 
     }
 }
 
+if (menuDeroulant[0] !== null){
+    remplirMenuDeroulant();
+}
 if(boutonBurger){
     boutonBurger.addEventListener("click", creerBurger);
 }
