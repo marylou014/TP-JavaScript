@@ -47,13 +47,12 @@ else if (localStorage.getItem("Pain Burger") === null){
     localStorage.setItem("Pain Burger", 10);
 }
 
-console.log(localStorage.getItem("Pain Burger"));
 
 let boutonIngredients = document.getElementById("btn-creer-ingredient"); // récup le bouton
 
-// function qui ajoute les ingrédient
+// function qui ajoute les ingrédients
 function ajouterIngredients(){
-    // récup les différent champs
+    // récup les différents champs
         let nomIngredients = document.getElementById("nom-ingredient").value;
         let quantiteIngredient = document.getElementById("quantite-ingredient").value;
         let messageErreur = document.getElementById("erreur-ingredient");
@@ -67,7 +66,7 @@ function ajouterIngredients(){
     else {
         // qaund c'est OK
         messageErreur.innerHTML = ""; // pas de message d'erreur
-        console.log("OK :", nomIngredients, quantiteIngredient);
+        //console.log("OK :", nomIngredients, quantiteIngredient);
 
         // vérif si l'ingrédient existe déja
         let ancien = localStorage.getItem(nomIngredients); // recherche si il existe
@@ -78,13 +77,89 @@ function ajouterIngredients(){
         else { // changement de  la quantité (ancienne + nouvelle)
             localStorage.setItem(nomIngredients, Number(ancien) + Number(quantiteIngredient));
         }
-        console.log(localStorage.getItem("Pain Burger"));
 
     }
 }
 
 if(boutonIngredients){
     boutonIngredients.addEventListener("click", ajouterIngredients);
+}
+
+// -------------------------------------------------------------------------------
+
+// Page créer burger
+
+let mapBurger = new Map(); // map qui stockera les burgers créer
+
+let boutonBurger = document.getElementById("btn-creer-burger"); // récup le bouton
+
+let menuDeroulant = [ // récup des menus déroulants
+    document.getElementById("ingredient-1"),
+    document.getElementById("ingredient-2"),
+    document.getElementById("ingredient-3"),
+]
+
+// boucle qui remplie les menus déroulant avec les éléments du locaStorage
+
+for (let i = 0; i < localStorage.length; i++){
+    let nom = localStorage.key(i);
+    // vérif que l'ingrédient est en stock (+ de 0 en quantité)
+        let verifStock = Number(localStorage.getItem(nom))
+        if (verifStock > 0){
+            // boucle dans la boucle pour remplir les trois listes
+            for (let liste of menuDeroulant){
+                let option = document.createElement("option"); // créer un élément de type option
+                option.value = nom; // set la value
+                option.textContent = nom; // set le nom
+                liste.appendChild(option); // ajouter à la liste
+            }
+        }
+    }
+
+// function qui créer les burgers
+function creerBurger(){
+    // récup les différents champs
+    let nomBurgerCreer = document.getElementById("nom-burger").value;
+    let champ1 = document.getElementById("ingredient-1").value;
+    let champ2 = document.getElementById("ingredient-2").value;
+    let champ3 = document.getElementById("ingredient-3").value;
+    let messageErreurBurger = document.getElementById("erreur-burger");
+
+    if (nomBurgerCreer === ""){ // si nom vide => message erreur
+        messageErreurBurger.innerHTML = "ERREUR : nom manquant";
+    }
+    else if (champ1 === ""){ // si champ1 rien de selectionner
+        messageErreurBurger.innerHTML = "ERREUR : Ingrédient 1 manquant";
+    }
+    else if (champ2 === ""){ // si champ2 rien de selectionner
+        messageErreurBurger.innerHTML = "ERREUR : Ingrédient 2 manquant";
+    }
+    else if (champ3 === ""){ // si champ3 rien de selectionner
+        messageErreurBurger.innerHTML = "ERREUR : Ingrédient 3 manquant";
+    }
+    else {
+        // qaund c'est OK
+        messageErreurBurger.innerHTML = ""; // pas de message d'erreur
+        //console.log("OK :", nomBurgerCreer, champ1, champ2, champ3) ;
+
+        mapBurger.set(nomBurgerCreer, [champ1, champ2, champ3]); // créer le burger et le stock dans la map
+
+        // en déduire les ingrédients
+            let optionChoisi = [champ1, champ2, champ3];
+
+            for (choix of optionChoisi){
+                let ancienneQuantite = Number(localStorage.getItem(choix)); // recup la quantité
+                //console.log("Avant : ", ancienneQuantite, choix );
+
+                localStorage.setItem(choix, ancienneQuantite -1); // retire 1 à la quantité
+                //console.log("Apres : ", choix, localStorage.getItem(choix)) ;
+            }
+
+    }
+}
+
+if(boutonBurger){
+    boutonBurger.addEventListener("click", creerBurger);
 }
 
 // -------------------------------------------------------------------------------
