@@ -37,6 +37,58 @@ if (img){ // ne marche que si sur la page il y a ma variable img
 
 // -------------------------------------------------------------------------------
 
+// Page créer ingrédient
+
+// créer des ingrédient de base si pas déjà là
+if (localStorage.getItem("Steak") === null){
+    localStorage.setItem("Steak", 10);
+}
+else if (localStorage.getItem("Pain Burger") === null){
+    localStorage.setItem("Pain Burger", 10);
+}
+
+console.log(localStorage.getItem("Pain Burger"));
+
+let boutonIngredients = document.getElementById("btn-creer-ingredient"); // récup le bouton
+
+// function qui ajoute les ingrédient
+function ajouterIngredients(){
+    // récup les différent champs
+        let nomIngredients = document.getElementById("nom-ingredient").value;
+        let quantiteIngredient = document.getElementById("quantite-ingredient").value;
+        let messageErreur = document.getElementById("erreur-ingredient");
+
+    if (nomIngredients === ""){ // si nom vide => message erreur
+        messageErreur.innerHTML = "ERREUR : nom manquant";
+    }
+    else if (quantiteIngredient  <= 0){ // si quantité <= 0 => message erreur
+        messageErreur.innerHTML = "ERREUR : quantité non valide";
+    }
+    else {
+        // qaund c'est OK
+        messageErreur.innerHTML = ""; // pas de message d'erreur
+        console.log("OK :", nomIngredients, quantiteIngredient);
+
+        // vérif si l'ingrédient existe déja
+        let ancien = localStorage.getItem(nomIngredients); // recherche si il existe
+
+        if (ancien === null){ // si renvoie null => existe pas => créer l'ingrédient
+            localStorage.setItem(nomIngredients, quantiteIngredient);
+        }
+        else { // changement de  la quantité (ancienne + nouvelle)
+            localStorage.setItem(nomIngredients, Number(ancien) + Number(quantiteIngredient));
+        }
+        console.log(localStorage.getItem("Pain Burger"));
+
+    }
+}
+
+if(boutonIngredients){
+    boutonIngredients.addEventListener("click", ajouterIngredients);
+}
+
+// -------------------------------------------------------------------------------
+
 // Qui sommes nous page
 let paraAPI = document.getElementById("para-api"); // recup balise paragraphe par l'id
 let liste = document.createElement("ul") // créer une balise liste pour mettre les productions
@@ -88,3 +140,5 @@ function recupInfoAPI(){ // fonction pour recup les infos
 if (paraAPI) { //ne marche que si sur la page il y a ma variable paraAPI
     recupInfoAPI(); // la fonction récup info API
 }
+
+
