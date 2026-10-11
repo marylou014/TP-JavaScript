@@ -233,6 +233,10 @@ fieldset.formulaire :focus-visible {
 }
 
 .banniere {
+  width: 80%;
+  height: 250px;          /* à ajuster */
+  object-fit: cover;
+  object-position: center;
   border: 4px solid var(--jaune);
 }
 
@@ -331,6 +335,9 @@ fieldset.formulaire button:active {
 /* ---------- Bandeaux d'images (Création Burger) ---------- */
 .bandeau {
   width: 100%;
+  height: 200px;          /* à ajuster */
+  object-fit: cover;      /* recadre l'image au lieu de l'étirer */
+  object-position: center;
 }
 
 /* ---------- Responsive ---------- */
