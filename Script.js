@@ -60,13 +60,13 @@ function ajouterIngredients(){
     if (nomIngredients === ""){ // si nom vide => message erreur
         messageErreur.innerHTML = "ERREUR : nom manquant";
     }
-    else if (quantiteIngredient  <= 0){ // si quantité <= 0 => message erreur
+    else if (quantiteIngredient  <= 0){ // si quantité plus de zéro 0 => message erreur
         messageErreur.innerHTML = "ERREUR : quantité non valide";
     }
     else {
         // qaund c'est OK
         messageErreur.innerHTML = ""; // pas de message d'erreur
-        //console.log("OK :", nomIngredients, quantiteIngredient);
+        //console.log("OK :", nomIngredients, quantiteIngredient); //test
 
         // vérif si l'ingrédient existe déja
         let ancien = localStorage.getItem(nomIngredients); // recherche si il existe
@@ -74,15 +74,16 @@ function ajouterIngredients(){
         if (ancien === null){ // si renvoie null => existe pas => créer l'ingrédient
             localStorage.setItem(nomIngredients, quantiteIngredient);
         }
-        else { // changement de  la quantité (ancienne + nouvelle)
+        else { // cas où il existe : changement de la quantité (ancienne + nouvelle)
             localStorage.setItem(nomIngredients, Number(ancien) + Number(quantiteIngredient));
         }
 
     }
 }
 
-if(boutonIngredients){
-    boutonIngredients.addEventListener("click", ajouterIngredients);
+//lancement que sur la page créer ingrédient
+if(boutonIngredients){ // ne marche que si le boutonIngrédient est sur la page
+    boutonIngredients.addEventListener("click", ajouterIngredients); // attend que le bouton soit cliqué pour lancer la fonction
 }
 
 // -------------------------------------------------------------------------------
@@ -99,27 +100,27 @@ let menuDeroulant = [ // récup des menus déroulants
     document.getElementById("ingredient-3"),
 ]
 
-// fonction qui remplie les menus déroulant avec les éléments du locaStorage avec un boucle
+// fonction qui remplie les menus déroulant avec les éléments du locaStorage avec une boucle
 function remplirMenuDeroulant(){
 
     // vider les listes (pour quand ca refresh)
-    for (let liste of menuDeroulant){
-        liste.innerHTML = "";
-        let optionVide = document.createElement("option");
-        optionVide.value = "";
-        liste.appendChild(optionVide);
+    for (let liste of menuDeroulant){ // pour chaque liste dans menu déroulant
+        liste.innerHTML = ""; // vide le nom
+        let optionVide = document.createElement("option"); // créer une option
+        optionVide.value = ""; // vide la valeur
+        liste.appendChild(optionVide); //ajout à la liste de l'option
     }
 
     for (let i = 0; i < localStorage.length; i++){
 
-        let nom = localStorage.key(i);
+        let nom = localStorage.key(i); // récup la key donc le nom
 
         // vérif que l'ingrédient est en stock (+ de 0 en quantité)
         let verifStock = Number(localStorage.getItem(nom))
 
-        if (verifStock > 0){
+        if (verifStock > 0){ // si y'a des stocks
             // boucle dans la boucle pour remplir les trois listes
-            for (let liste of menuDeroulant){
+            for (let liste of menuDeroulant){ // pour chaque liste de menu déroulant
 
                 let option = document.createElement("option"); // créer un élément de type option
                 option.value = nom; // set la value
@@ -142,44 +143,45 @@ function creerBurger(){
     if (nomBurgerCreer === ""){ // si nom vide => message erreur
         messageErreurBurger.innerHTML = "ERREUR : nom manquant";
     }
-    else if (champ1 === ""){ // si champ1 rien de selectionner
+    else if (champ1 === ""){ // si champ1 rien de selectionner => message erreur
         messageErreurBurger.innerHTML = "ERREUR : Ingrédient 1 manquant";
     }
-    else if (champ2 === ""){ // si champ2 rien de selectionner
+    else if (champ2 === ""){ // si champ2 rien de selectionner => message erreur
         messageErreurBurger.innerHTML = "ERREUR : Ingrédient 2 manquant";
     }
-    else if (champ3 === ""){ // si champ3 rien de selectionner
+    else if (champ3 === ""){ // si champ3 rien de selectionner => message erreur
         messageErreurBurger.innerHTML = "ERREUR : Ingrédient 3 manquant";
     }
     else {
         // qaund c'est OK
         messageErreurBurger.innerHTML = ""; // pas de message d'erreur
-        //console.log("OK :", nomBurgerCreer, champ1, champ2, champ3) ;
+        //console.log("OK :", nomBurgerCreer, champ1, champ2, champ3); //test
 
         mapBurger.set(nomBurgerCreer, [champ1, champ2, champ3]); // créer le burger et le stock dans la map
 
         // en déduire les ingrédients
-            let optionChoisi = [champ1, champ2, champ3];
+            let optionChoisi = [champ1, champ2, champ3]; // met toutes les options choisi dans un tableau
 
-            for (let choix of optionChoisi){
+            for (let choix of optionChoisi){ // pour chaque choix dans le tableau
                 let ancienneQuantite = Number(localStorage.getItem(choix)); // recup la quantité
-                //console.log("Avant : ", ancienneQuantite, choix );
+                //console.log("Avant : ", ancienneQuantite, choix ); //test
 
                 localStorage.setItem(choix, ancienneQuantite -1); // retire 1 à la quantité
-                //console.log("Apres : ", choix, localStorage.getItem(choix)) ;
+                //console.log("Apres : ", choix, localStorage.getItem(choix)); //test
             }
-        //maj liste + retire les champs
+        //maj liste + vide les champs
             remplirMenuDeroulant();
-            document.getElementById("nom-burger").value = ""; // vide le champs nom
+            document.getElementById("nom-burger").value = ""; // vide le champ nom
 
     }
 }
 
-if (menuDeroulant[0] !== null){
-    remplirMenuDeroulant();
+//lancement que sur la page création burger
+if (menuDeroulant[0] !== null){ // ne marche que si on est sur la page avec le menu déroulant
+    remplirMenuDeroulant(); // fonction remplir les menus déroulants
 }
-if(boutonBurger){
-    boutonBurger.addEventListener("click", creerBurger);
+if(boutonBurger){ // ne marche que si le bouton est sur la page
+    boutonBurger.addEventListener("click", creerBurger); // attend que le bouton soit cliqué pour lancer la fonction
 }
 
 // -------------------------------------------------------------------------------
@@ -195,20 +197,24 @@ function recupInfoAPI(){ // fonction pour recup les infos
             if (requete.status == 200) { // verif le status
                 // quand OK :
                 let resultat = JSON.parse(requete.responseText);
-                //console.log(resultat);
+                //console.log(resultat); //test
+
                 // récup les élément dont j'ai besoin et les attribue à une variable
                     let numBio = resultat.items[0].numeroBio;
                     let gerant = resultat.items[0].gerant;
                     let lieu = resultat.items[0].adressesOperateurs[0].lieu;
                     let codeP = resultat.items[0].adressesOperateurs[0].codePostal;
                     let ville = resultat.items[0].adressesOperateurs[0].ville;
-                //console.log(numBio, gerant, lieu, codeP, ville);
+                //console.log(numBio, gerant, lieu, codeP, ville); //test
+
                     // recup tout les production grace à une boucle FOR
-                    let tabProduction = resultat.items[0].productions; //met toute les production dans tabProduction
-                    //console.log(tabProduction);
+                    let tabProduction = resultat.items[0].productions; //met toutes les productions dans tabProduction
+                    //console.log(tabProduction); //test
+
                     let tailleTabProduction = tabProduction.length // prend la taille de tabProduction
                     for (let i = 0; i < tailleTabProduction; i++) {
-                        //console.log(tabProduction[i].nom);
+                        //console.log(tabProduction[i].nom); //test
+
                         let point = document.createElement("li"); // créer les point de la liste
                         point.textContent = tabProduction[i].nom; // met le texte dans les points
                         liste.appendChild(point); //ajoute les point à la liste
